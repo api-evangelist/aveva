@@ -1,0 +1,88 @@
+aid: aveva
+name: AVEVA
+description: >-
+  AVEVA is an industrial software company (a subsidiary of Schneider Electric) providing
+  engineering, operations, and data management software for energy, utilities, marine,
+  and manufacturing industries. AVEVA's product portfolio includes System Platform
+  (unified SCADA/MES/IIoT), Plant SCADA, MES, Edge, PI System (industrial data
+  infrastructure), and CONNECT cloud services, all of which expose REST APIs for
+  industrial data integration, asset management, and operational analytics.
+type: Index
+url: https://raw.githubusercontent.com/api-evangelist/aveva/refs/heads/main/apis.yml
+tags:
+  - SCADA
+  - MES
+  - Industrial Automation
+  - Manufacturing
+  - Industrial IoT
+  - IIoT
+  - Industrial Data
+  - Energy
+created: '2026-06-05'
+modified: '2026-06-05'
+specificationVersion: '0.19'
+apis:
+  - aid: aveva:aveva-connect-rest-api
+    name: AVEVA CONNECT REST API
+    description: >-
+      The AVEVA CONNECT cloud platform REST APIs provide access to industrial data
+      services including account management, identity management, data ingress pipelines,
+      data views, and time-series retrieval. Enables cloud-native integration of OT data
+      from AVEVA System Platform, Plant SCADA, and PI System into analytics and
+      enterprise applications.
+    humanURL: https://docs.aveva.com/
+    baseURL: https://api.connect.aveva.com
+    tags:
+      - Industrial Data
+      - Time Series
+      - Asset Management
+      - Cloud
+      - REST
+    properties:
+      - url: https://docs.aveva.com/
+        type: Documentation
+      - url: https://www.aveva.com/en/products/aveva-pi-system-developer-technologies/
+        type: Portal
+  - aid: aveva:aveva-pi-system-rest-api
+    name: AVEVA PI System REST API
+    description: >-
+      The AVEVA PI System REST API (PI Web API) provides RESTful HTTP access to time-
+      series sensor data, asset metadata, and event frames stored in PI Server. Supports
+      GET, POST, PUT, PATCH, and DELETE operations for reading real-time and historical
+      process data, managing PI AF asset hierarchies, and streaming data via WebSocket.
+    humanURL: https://www.aveva.com/en/products/aveva-pi-system-developer-technologies/
+    baseURL: https://{pi-server}/piwebapi
+    tags:
+      - Industrial Data
+      - Time Series
+      - Process Control
+      - Historian
+      - REST
+      - WebSocket
+    properties:
+      - url: https://www.aveva.com/en/products/aveva-pi-system-developer-technologies/
+        type: Documentation
+      - url: https://docs.aveva.com/
+        type: Portal
+common:
+  - type: Website
+    url: https://www.aveva.com
+  - type: Documentation
+    url: https://docs.aveva.com/
+  - type: Blog
+    url: https://www.aveva.com/en/perspectives/blog/
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/aveva
+  - type: YouTube
+    url: https://www.youtube.com/@AVEVASoftware
+  - type: About
+    url: https://www.aveva.com/en/about/
+  - type: Support
+    url: https://www.aveva.com/en/support/
+  - type: Pricing
+    url: https://www.aveva.com/en/contact/
+  - type: Newsroom
+    url: https://www.aveva.com/en/perspectives/news/
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
