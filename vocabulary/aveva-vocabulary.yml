@@ -1,0 +1,165 @@
+name: AVEVA Industrial Vocabulary
+description: >-
+  Key industrial and manufacturing concepts used across AVEVA's product portfolio
+  including PI System, CONNECT cloud platform, System Platform, Plant SCADA,
+  and MES solutions.
+version: "1.0"
+terms:
+  - term: PI Point
+    definition: >-
+      A named storage location in the PI Server that holds time-series data
+      from a single sensor or calculated value. Historically called a "tag";
+      each PI Point has a unique name, engineering units, descriptor, and
+      compression settings.
+    tags:
+      - PI System
+      - Time Series
+      - Historian
+
+  - term: PI Web API
+    definition: >-
+      The RESTful HTTP interface to the PI Server and PI Asset Framework,
+      enabling retrieval and write of time-series values, asset metadata, and
+      event frames over standard HTTP using JSON payloads and WebId addressing.
+    tags:
+      - PI System
+      - REST
+      - Integration
+
+  - term: Asset Framework (AF)
+    definition: >-
+      The PI System component that provides a hierarchical, object-oriented
+      model of physical assets (equipment, units, sites). AF elements link
+      together PI Points and calculated attributes to represent real-world
+      assets and their relationships.
+    tags:
+      - PI System
+      - Asset Management
+      - Metadata
+
+  - term: WebId
+    definition: >-
+      A unique, stable, URL-safe identifier assigned by PI Web API to every
+      addressable object (PI Point, AF Element, Event Frame, etc.). Used as
+      a primary key in all PI Web API REST calls.
+    tags:
+      - PI System
+      - REST
+      - Identifier
+
+  - term: Event Frame
+    definition: >-
+      A time-bounded record in the PI Asset Framework that captures a
+      significant operational event (batch run, alarm, shift) by linking
+      a start time, end time, and associated process data to one or more
+      AF elements.
+    tags:
+      - PI System
+      - Event Data
+      - Operations
+
+  - term: AVEVA CONNECT
+    definition: >-
+      AVEVA's cloud platform (formerly OSIsoft Cloud Services / AVEVA Data Hub)
+      providing database-as-a-service for storing, streaming, and analyzing
+      industrial time-series data. Exposes REST APIs for data ingress, data
+      views, sequential data store, and identity management.
+    tags:
+      - Cloud
+      - SaaS
+      - Time Series
+
+  - term: Data View
+    definition: >-
+      A user-defined query object in AVEVA CONNECT that selects and shapes
+      streams of time-series data from multiple sources into a tabular result
+      suitable for analytics or export. Supports interpolated and recorded
+      retrieval modes.
+    tags:
+      - CONNECT
+      - Analytics
+      - Query
+
+  - term: OMF (Open Messaging Format)
+    definition: >-
+      AVEVA's JSON-based message format for sending time-series data, type
+      definitions, and asset container mappings to PI Server or AVEVA CONNECT
+      via HTTP POST. Decouples data producers from PI infrastructure.
+    tags:
+      - Integration
+      - Data Ingress
+      - Protocol
+
+  - term: Sequential Data Store (SDS)
+    definition: >-
+      The underlying time-series storage engine in AVEVA CONNECT. Organizes
+      data into namespaces, types, and streams; provides REST endpoints for
+      reading recorded, interpolated, and window-based data.
+    tags:
+      - CONNECT
+      - Storage
+      - Time Series
+
+  - term: SCADA (Supervisory Control and Data Acquisition)
+    definition: >-
+      An industrial control system architecture that monitors and controls
+      field devices (PLCs, RTUs, sensors) in real time. AVEVA Plant SCADA
+      and System Platform both implement SCADA functionality with historian
+      and alarming capabilities.
+    tags:
+      - Industrial Automation
+      - Control Systems
+      - OT
+
+  - term: MES (Manufacturing Execution System)
+    definition: >-
+      Software that manages and monitors production processes on the shop
+      floor in real time, bridging ERP business systems and plant-floor
+      control systems. AVEVA MES tracks orders, genealogy, performance,
+      and quality.
+    tags:
+      - Manufacturing
+      - Production
+      - Operations
+
+  - term: IIoT (Industrial Internet of Things)
+    definition: >-
+      The network of industrial sensors, controllers, and edge devices that
+      collect and transmit operational data to cloud or on-premises platforms.
+      AVEVA Edge and CONNECT enable IIoT data pipelines from OT devices to
+      analytics applications.
+    tags:
+      - IoT
+      - Edge
+      - Connectivity
+
+  - term: Tenant
+    definition: >-
+      The top-level organizational unit in AVEVA CONNECT. A tenant corresponds
+      to a customer account and contains one or more namespaces where data
+      streams and assets are stored.
+    tags:
+      - CONNECT
+      - Identity
+      - Multi-Tenancy
+
+  - term: Namespace
+    definition: >-
+      A logical data partition within an AVEVA CONNECT tenant. Namespaces
+      isolate streams, types, and views from other namespaces and are the
+      primary scope for data access control and API calls.
+    tags:
+      - CONNECT
+      - Storage
+      - Multi-Tenancy
+
+  - term: Engineering Units
+    definition: >-
+      The physical measurement units (e.g., degrees Celsius, bar, m/s)
+      associated with a PI Point or SDS stream. Stored as metadata and used
+      for display, conversion, and validation in AVEVA historian and cloud
+      products.
+    tags:
+      - Metadata
+      - PI System
+      - CONNECT

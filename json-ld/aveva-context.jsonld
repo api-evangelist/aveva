@@ -1,0 +1,123 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "aveva": "https://www.aveva.com/ontology/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "AVEVA": {
+      "@id": "schema:Organization",
+      "@type": "@id"
+    },
+    "name": "schema:name",
+    "url": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "description": "schema:description",
+    "industry": "schema:industry",
+    "parentOrganization": {
+      "@id": "schema:parentOrganization",
+      "@type": "@id"
+    },
+    "sameAs": {
+      "@id": "schema:sameAs",
+      "@type": "@id"
+    },
+
+    "PIServer": {
+      "@id": "aveva:PIServer",
+      "@type": "@id"
+    },
+    "PIPoint": {
+      "@id": "aveva:PIPoint",
+      "@type": "@id"
+    },
+    "AssetFramework": {
+      "@id": "aveva:AssetFramework",
+      "@type": "@id"
+    },
+    "TimeSeriesData": {
+      "@id": "aveva:TimeSeriesData",
+      "@type": "@id"
+    },
+    "DataView": {
+      "@id": "aveva:DataView",
+      "@type": "@id"
+    },
+    "EventFrame": {
+      "@id": "aveva:EventFrame",
+      "@type": "@id"
+    },
+    "Asset": {
+      "@id": "aveva:Asset",
+      "@type": "@id"
+    },
+    "Stream": {
+      "@id": "aveva:Stream",
+      "@type": "@id"
+    },
+    "Tag": {
+      "@id": "aveva:Tag",
+      "@type": "@id"
+    },
+    "Timestamp": {
+      "@id": "schema:DateTime",
+      "@type": "xsd:dateTime"
+    },
+    "Value": {
+      "@id": "schema:value"
+    },
+    "Quality": {
+      "@id": "aveva:Quality"
+    },
+    "Path": {
+      "@id": "aveva:Path"
+    },
+    "WebId": {
+      "@id": "aveva:WebId"
+    },
+    "UnitOfMeasure": {
+      "@id": "aveva:UnitOfMeasure"
+    },
+    "Tenant": {
+      "@id": "aveva:Tenant",
+      "@type": "@id"
+    },
+    "Namespace": {
+      "@id": "aveva:Namespace",
+      "@type": "@id"
+    },
+    "OMF": {
+      "@id": "aveva:OpenMessageFormat"
+    },
+    "SCADA": {
+      "@id": "aveva:SCADA"
+    },
+    "MES": {
+      "@id": "aveva:ManufacturingExecutionSystem"
+    },
+    "IIoT": {
+      "@id": "aveva:IndustrialInternetOfThings"
+    }
+  },
+
+  "@graph": [
+    {
+      "@type": "schema:Organization",
+      "@id": "https://www.aveva.com",
+      "name": "AVEVA",
+      "url": "https://www.aveva.com",
+      "description": "Industrial software company providing engineering, operations, and data management software for energy, utilities, marine, and manufacturing industries.",
+      "industry": "Industrial Software / Operational Technology",
+      "parentOrganization": {
+        "@id": "https://www.se.com",
+        "name": "Schneider Electric"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/aveva",
+        "https://www.youtube.com/@AVEVASoftware"
+      ]
+    }
+  ]
+}
