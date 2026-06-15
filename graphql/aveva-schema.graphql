@@ -1,0 +1,1389 @@
+"""
+AVEVA GraphQL API Schema
+Conceptual schema derived from AVEVA REST APIs including PI Web API,
+AVEVA CONNECT, System Platform, Plant SCADA, and MES solutions.
+"""
+
+# ─── Scalars ─────────────────────────────────────────────────────────────────
+
+scalar DateTime
+scalar JSON
+scalar Float64
+scalar BigInt
+
+# ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum PIPointType {
+  FLOAT32
+  FLOAT64
+  INT16
+  INT32
+  DIGITAL
+  STRING
+  TIMESTAMP
+  BLOB
+}
+
+enum SummaryType {
+  TOTAL
+  AVERAGE
+  MINIMUM
+  MAXIMUM
+  RANGE
+  STD_DEV
+  POP_STD_DEV
+  COUNT
+  PERCENT_GOOD
+  NONE
+}
+
+enum CalcBasis {
+  TIME_WEIGHTED
+  EVENT_WEIGHTED
+  TIME_WEIGHTED_CONTINUOUS
+  TIME_WEIGHTED_DISCRETE
+  EVENT_WEIGHTED_EXCLUDE_MOST_RECENT_EVENT
+  EVENT_WEIGHTED_EXCLUDE_EARLIEST_EVENT
+  EVENT_WEIGHTED_INCLUDE_BOTH_ENDS
+}
+
+enum RetrievalMode {
+  AUTO
+  ACTUAL_VALUE
+  INTERPOLATED_VALUE
+  BEFORE
+  AFTER
+  INSIDE
+  OUTSIDE
+}
+
+enum EventFrameStatus {
+  ACTIVE
+  CLOSED
+  INACTIVE
+}
+
+enum UnitOfMeasureClass {
+  ACCELERATION
+  ANGLE
+  AREA
+  CONCENTRATION
+  CURRENCY
+  DENSITY
+  ELECTRIC_CURRENT
+  ENERGY
+  FLOW
+  FORCE
+  FREQUENCY
+  LENGTH
+  MASS
+  POWER
+  PRESSURE
+  TEMPERATURE
+  TIME
+  VELOCITY
+  VOLUME
+}
+
+enum AssetAttributeType {
+  BOOLEAN
+  BYTE
+  DOUBLE
+  FLOAT
+  INT16
+  INT32
+  INT64
+  STRING
+  TIMESTAMP
+  PI_POINT
+  ENUMERATION
+}
+
+enum UserRole {
+  READER
+  WRITER
+  ADMINISTRATOR
+  POWER_USER
+}
+
+enum ConnectionStatus {
+  CONNECTED
+  DISCONNECTED
+  UNKNOWN
+  DEGRADED
+}
+
+enum AlarmSeverity {
+  INFORMATION
+  WARNING
+  MINOR
+  MAJOR
+  CRITICAL
+}
+
+enum AlarmState {
+  UNACKNOWLEDGED
+  ACKNOWLEDGED
+  SHELVED
+  SUPPRESSED
+  DISABLED
+}
+
+enum WorkOrderStatus {
+  OPEN
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+  ON_HOLD
+}
+
+enum DocumentStatus {
+  DRAFT
+  UNDER_REVIEW
+  APPROVED
+  RELEASED
+  OBSOLETE
+}
+
+# ─── Core Infrastructure Types ────────────────────────────────────────────────
+
+"""A PI Server instance hosting PI Data Archive and PI Asset Framework."""
+type PIServer {
+  id: ID!
+  name: String!
+  serverVersion: String
+  host: String
+  port: Int
+  isConnected: Boolean!
+  connectionStatus: ConnectionStatus!
+  dataArchive: PIDataArchive
+  assetServer: PIAssetServer
+  analysisService: PIAnalysisService
+  notificationService: PINotificationService
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+"""PI Data Archive — the core time-series historian."""
+type PIDataArchive {
+  id: ID!
+  name: String!
+  serverVersion: String
+  totalPoints: BigInt
+  dataRetentionDays: Int
+  compressionEnabled: Boolean!
+  server: PIServer!
+  points(filter: PIPointFilter, first: Int, after: String): PIPointConnection!
+}
+
+"""PI Asset Framework server."""
+type PIAssetServer {
+  id: ID!
+  name: String!
+  serverVersion: String
+  server: PIServer!
+  databases(first: Int, after: String): PIAFDatabaseConnection!
+}
+
+"""PI Analysis Service for running calculations on PI data."""
+type PIAnalysisService {
+  id: ID!
+  name: String!
+  serverVersion: String
+  server: PIServer!
+  analyses(filter: AnalysisFilter, first: Int, after: String): AnalysisConnection!
+}
+
+"""PI Notification Service for alerts and notifications."""
+type PINotificationService {
+  id: ID!
+  name: String!
+  server: PIServer!
+  rules(first: Int, after: String): NotificationRuleConnection!
+}
+
+# ─── PI Points (Tags) ─────────────────────────────────────────────────────────
+
+"""A PI Point (tag) — a named time-series data stream in PI Data Archive."""
+type PIPoint {
+  id: ID!
+  tag: String!
+  descriptor: String
+  pointType: PIPointType!
+  engineeringUnits: String
+  zero: Float64
+  span: Float64
+  step: Boolean!
+  compressionEnabled: Boolean!
+  compressionDeviation: Float64
+  compressionMaximum: Float64
+  compressionMinimum: Float64
+  dataServer: PIDataArchive!
+  currentValue: TimedValue
+  interpolatedValue(time: DateTime!): TimedValue
+  recordedValues(
+    startTime: DateTime!
+    endTime: DateTime!
+    maxCount: Int
+    retrievalMode: RetrievalMode
+    first: Int
+    after: String
+  ): TimedValueConnection!
+  interpolatedValues(
+    startTime: DateTime!
+    endTime: DateTime!
+    interval: String!
+    first: Int
+    after: String
+  ): TimedValueConnection!
+  summaryValues(
+    startTime: DateTime!
+    endTime: DateTime!
+    summaryType: SummaryType!
+    calcBasis: CalcBasis
+    sampleInterval: String
+  ): [SummaryValue!]!
+  attributes: [PIPointAttribute!]!
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+"""A timestamped value from a PI Point."""
+type TimedValue {
+  timestamp: DateTime!
+  value: JSON
+  good: Boolean!
+  questionable: Boolean!
+  substituted: Boolean!
+  annotated: Boolean!
+  systemState: String
+}
+
+"""A summary statistic for a PI Point over an interval."""
+type SummaryValue {
+  type: SummaryType!
+  value: TimedValue!
+  percentGood: Float
+}
+
+"""A configuration attribute on a PI Point."""
+type PIPointAttribute {
+  name: String!
+  value: JSON
+}
+
+# ─── PI Asset Framework (PI AF) ───────────────────────────────────────────────
+
+"""A PI AF database containing asset hierarchies and event frames."""
+type PIAFDatabase {
+  id: ID!
+  name: String!
+  description: String
+  server: PIAssetServer!
+  elements(filter: ElementFilter, first: Int, after: String): ElementConnection!
+  elementTemplates(first: Int, after: String): ElementTemplateConnection!
+  eventFrames(filter: EventFrameFilter, first: Int, after: String): EventFrameConnection!
+  eventFrameTemplates(first: Int, after: String): EventFrameTemplateConnection!
+  tables(first: Int, after: String): AFTableConnection!
+  categories(first: Int, after: String): AFCategoryConnection!
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+"""A PI AF element — an asset in the PI AF hierarchy."""
+type Element {
+  id: ID!
+  name: String!
+  description: String
+  path: String!
+  templateName: String
+  template: ElementTemplate
+  database: PIAFDatabase!
+  parent: Element
+  children(first: Int, after: String): ElementConnection!
+  attributes(first: Int, after: String): AssetAttributeConnection!
+  eventFrames(filter: EventFrameFilter, first: Int, after: String): EventFrameConnection!
+  categories: [AFCategory!]!
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+"""A template defining the structure of PI AF elements."""
+type ElementTemplate {
+  id: ID!
+  name: String!
+  description: String
+  database: PIAFDatabase!
+  baseTemplate: ElementTemplate
+  derivedTemplates: [ElementTemplate!]!
+  attributeTemplates(first: Int, after: String): AttributeTemplateConnection!
+  categories: [AFCategory!]!
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+"""An attribute on a PI AF element (maps to a data source such as a PI Point)."""
+type AssetAttribute {
+  id: ID!
+  name: String!
+  description: String
+  type: AssetAttributeType!
+  engineeringUnits: String
+  displayDigits: Int
+  defaultValue: JSON
+  currentValue: TimedValue
+  dataReference: String
+  configString: String
+  element: Element
+  template: AttributeTemplate
+  categories: [AFCategory!]!
+  children(first: Int, after: String): AssetAttributeConnection!
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+"""A template defining the structure of PI AF element attributes."""
+type AttributeTemplate {
+  id: ID!
+  name: String!
+  description: String
+  type: AssetAttributeType!
+  engineeringUnits: String
+  defaultValue: JSON
+  dataReference: String
+  configString: String
+  elementTemplate: ElementTemplate!
+  categories: [AFCategory!]!
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+"""A PI AF event frame — a time-bounded event with context and attributes."""
+type EventFrame {
+  id: ID!
+  name: String!
+  description: String
+  startTime: DateTime!
+  endTime: DateTime
+  status: EventFrameStatus!
+  severity: String
+  template: EventFrameTemplate
+  database: PIAFDatabase!
+  primaryReferencedElement: Element
+  referencedElements: [Element!]!
+  attributes(first: Int, after: String): AssetAttributeConnection!
+  childEventFrames(first: Int, after: String): EventFrameConnection!
+  categories: [AFCategory!]!
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+"""A template defining the structure of PI AF event frames."""
+type EventFrameTemplate {
+  id: ID!
+  name: String!
+  description: String
+  database: PIAFDatabase!
+  attributeTemplates(first: Int, after: String): AttributeTemplateConnection!
+  categories: [AFCategory!]!
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+"""A category for organizing PI AF objects."""
+type AFCategory {
+  id: ID!
+  name: String!
+  description: String
+  database: PIAFDatabase!
+}
+
+"""An AF lookup table."""
+type AFTable {
+  id: ID!
+  name: String!
+  description: String
+  database: PIAFDatabase!
+  columns: [AFTableColumn!]!
+  rows(first: Int, after: String): AFTableRowConnection!
+}
+
+"""A column definition in an AF lookup table."""
+type AFTableColumn {
+  name: String!
+  type: String!
+  isKey: Boolean!
+}
+
+"""A row in an AF lookup table."""
+type AFTableRow {
+  values: JSON!
+}
+
+# ─── PI Analyses & Calculations ───────────────────────────────────────────────
+
+"""A PI Analysis that runs calculations on PI data."""
+type Analysis {
+  id: ID!
+  name: String!
+  description: String
+  expression: String
+  outputAttributes: [AssetAttribute!]!
+  element: Element
+  template: ElementTemplate
+  timeRule: AnalysisTimeRule
+  enabled: Boolean!
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+"""Time rule controlling when a PI Analysis runs."""
+type AnalysisTimeRule {
+  type: String!
+  interval: String
+  trigger: String
+}
+
+# ─── PI Notifications ─────────────────────────────────────────────────────────
+
+"""A PI Notification rule that sends alerts based on conditions."""
+type NotificationRule {
+  id: ID!
+  name: String!
+  description: String
+  criteria: String
+  enabled: Boolean!
+  subscribers: [NotificationSubscriber!]!
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+"""A subscriber to a PI Notification rule."""
+type NotificationSubscriber {
+  id: ID!
+  name: String!
+  contactTemplate: String
+  notificationFormat: String
+}
+
+# ─── AVEVA CONNECT Cloud ──────────────────────────────────────────────────────
+
+"""An AVEVA CONNECT tenant (cloud organization account)."""
+type Tenant {
+  id: ID!
+  name: String!
+  region: String!
+  namespaces(first: Int, after: String): NamespaceConnection!
+  users(first: Int, after: String): UserConnection!
+  roles: [Role!]!
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+"""A namespace within an AVEVA CONNECT tenant — isolates data and configuration."""
+type Namespace {
+  id: ID!
+  name: String!
+  description: String
+  region: String!
+  tenant: Tenant!
+  streams(filter: StreamFilter, first: Int, after: String): StreamConnection!
+  assets(filter: ConnectAssetFilter, first: Int, after: String): ConnectAssetConnection!
+  dataViews(first: Int, after: String): DataViewConnection!
+  transferConfigurations(first: Int, after: String): TransferConfigurationConnection!
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+"""A time-series data stream in AVEVA CONNECT."""
+type Stream {
+  id: ID!
+  name: String!
+  description: String
+  typeId: String
+  streamType: StreamType
+  namespace: Namespace!
+  lastValue: StreamValue
+  values(
+    startIndex: DateTime!
+    endIndex: DateTime!
+    count: Int
+    first: Int
+    after: String
+  ): StreamValueConnection!
+  summaries(
+    startIndex: DateTime!
+    endIndex: DateTime!
+    summaryType: SummaryType!
+    count: Int
+  ): [StreamSummary!]!
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+"""Type definition for a stream's data structure."""
+type StreamType {
+  id: ID!
+  name: String!
+  description: String
+  properties: [StreamTypeProperty!]!
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+"""A property definition within a stream type."""
+type StreamTypeProperty {
+  id: String!
+  name: String!
+  type: String!
+  isIndex: Boolean!
+  isKey: Boolean!
+  uom: String
+}
+
+"""A data value from a stream."""
+type StreamValue {
+  timestamp: DateTime!
+  value: JSON!
+}
+
+"""A summary statistic for a stream over an interval."""
+type StreamSummary {
+  type: SummaryType!
+  start: DateTime!
+  end: DateTime!
+  value: Float64
+  count: BigInt
+}
+
+"""An asset in AVEVA CONNECT."""
+type ConnectAsset {
+  id: ID!
+  name: String!
+  description: String
+  assetType: String
+  namespace: Namespace!
+  attributes: [ConnectAssetAttribute!]!
+  status: ConnectionStatus
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+"""An attribute on a CONNECT asset."""
+type ConnectAssetAttribute {
+  id: String!
+  name: String!
+  description: String
+  streamId: String
+  stream: Stream
+  value: StreamValue
+  uom: String
+}
+
+"""A data view configuration for querying multiple streams."""
+type DataView {
+  id: ID!
+  name: String!
+  description: String
+  namespace: Namespace!
+  queries: [DataViewQuery!]!
+  dataFields: [DataField!]!
+  indexTypeCode: String
+  defaultStartIndex: DateTime
+  defaultEndIndex: DateTime
+  defaultInterval: String
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+"""A query definition within a data view."""
+type DataViewQuery {
+  id: String!
+  kind: String!
+  value: String!
+}
+
+"""A data field in a data view mapping streams to columns."""
+type DataField {
+  source: DataFieldSource!
+  keys: [String!]!
+  summaries: [SummaryType!]!
+  label: String
+  streamReferenceNames: [String!]!
+}
+
+"""Source definition for a data field."""
+type DataFieldSource {
+  fieldSetIndex: Int!
+  propertyName: String!
+}
+
+"""Configuration for transferring data into AVEVA CONNECT."""
+type TransferConfiguration {
+  id: ID!
+  name: String!
+  description: String
+  namespace: Namespace!
+  sourceType: String!
+  connectionString: String
+  enabled: Boolean!
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+# ─── Identity & Access Management ────────────────────────────────────────────
+
+"""A user in the AVEVA system."""
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  roles: [Role!]!
+  tenant: Tenant
+  active: Boolean!
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+"""A role defining permissions in the AVEVA system."""
+type Role {
+  id: ID!
+  name: String!
+  description: String
+  permissions: [Permission!]!
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+"""A specific permission within a role."""
+type Permission {
+  id: ID!
+  resource: String!
+  action: String!
+  allowed: Boolean!
+}
+
+"""An API client (service account) for programmatic AVEVA access."""
+type ApiClient {
+  id: ID!
+  name: String!
+  clientId: String!
+  roles: [Role!]!
+  tenant: Tenant!
+  active: Boolean!
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+# ─── Plant SCADA (Citect) ─────────────────────────────────────────────────────
+
+"""A Plant SCADA project (formerly Citect SCADA)."""
+type ScadaProject {
+  id: ID!
+  name: String!
+  description: String
+  version: String
+  servers: [ScadaServer!]!
+  tags(filter: ScadaTagFilter, first: Int, after: String): ScadaTagConnection!
+  alarms(filter: AlarmFilter, first: Int, after: String): AlarmConnection!
+  trends(first: Int, after: String): TrendConnection!
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+"""A Plant SCADA server node."""
+type ScadaServer {
+  id: ID!
+  name: String!
+  role: String!
+  host: String
+  project: ScadaProject!
+  connectionStatus: ConnectionStatus!
+}
+
+"""A SCADA tag — a named I/O data point."""
+type ScadaTag {
+  id: ID!
+  name: String!
+  description: String
+  equipmentName: String
+  cluster: String
+  address: String
+  dataType: String
+  engUnits: String
+  rawZero: Float
+  rawFull: Float
+  engZero: Float
+  engFull: Float
+  currentValue: TimedValue
+  project: ScadaProject!
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+"""A SCADA alarm definition."""
+type Alarm {
+  id: ID!
+  name: String!
+  description: String
+  tag: String
+  condition: String
+  severity: AlarmSeverity!
+  state: AlarmState!
+  priority: Int
+  area: String
+  equipment: String
+  timestamp: DateTime
+  acknowledgedAt: DateTime
+  acknowledgedBy: String
+  project: ScadaProject
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+"""A SCADA trend — a configured historical trend display."""
+type Trend {
+  id: ID!
+  name: String!
+  description: String
+  tags: [ScadaTag!]!
+  samplePeriod: Int
+  project: ScadaProject!
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+# ─── Manufacturing Execution System (MES) ────────────────────────────────────
+
+"""An MES production order (work order)."""
+type WorkOrder {
+  id: ID!
+  orderNumber: String!
+  description: String
+  status: WorkOrderStatus!
+  productCode: String!
+  quantity: Float!
+  unitOfMeasure: String!
+  plannedStartTime: DateTime
+  plannedEndTime: DateTime
+  actualStartTime: DateTime
+  actualEndTime: DateTime
+  productionLine: ProductionLine
+  operations: [WorkOrderOperation!]!
+  qualityResults: [QualityResult!]!
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+"""An operation step within an MES work order."""
+type WorkOrderOperation {
+  id: ID!
+  sequenceNumber: Int!
+  name: String!
+  description: String
+  workCenter: String
+  plannedDuration: Float
+  actualDuration: Float
+  status: WorkOrderStatus!
+  workOrder: WorkOrder!
+}
+
+"""An MES production line."""
+type ProductionLine {
+  id: ID!
+  name: String!
+  description: String
+  facility: String
+  area: String
+  capacity: Float
+  unitOfMeasure: String
+  workOrders(filter: WorkOrderFilter, first: Int, after: String): WorkOrderConnection!
+  equipment: [Equipment!]!
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+"""A piece of equipment in the MES/SCADA system."""
+type Equipment {
+  id: ID!
+  name: String!
+  description: String
+  equipmentClass: String
+  manufacturer: String
+  model: String
+  serialNumber: String
+  installDate: DateTime
+  maintenanceDate: DateTime
+  productionLine: ProductionLine
+  tags: [ScadaTag!]!
+  status: ConnectionStatus!
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+"""An MES quality measurement result."""
+type QualityResult {
+  id: ID!
+  workOrder: WorkOrder!
+  parameterName: String!
+  measuredValue: Float!
+  unitOfMeasure: String
+  lowerLimit: Float
+  upperLimit: Float
+  passed: Boolean!
+  measuredAt: DateTime!
+  measuredBy: String
+}
+
+"""An MES material/product definition."""
+type Material {
+  id: ID!
+  code: String!
+  name: String!
+  description: String
+  category: String
+  unitOfMeasure: String!
+  specifications: JSON
+  workOrders(first: Int, after: String): WorkOrderConnection!
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+# ─── Engineering Document Management ─────────────────────────────────────────
+
+"""An engineering document."""
+type EngineeringDocument {
+  id: ID!
+  documentNumber: String!
+  title: String!
+  description: String
+  revision: String!
+  status: DocumentStatus!
+  documentType: String!
+  discipline: String
+  project: EngineeringProject
+  filePath: String
+  fileSize: BigInt
+  checksum: String
+  tags: [String!]!
+  attributes: JSON
+  createdAt: DateTime
+  modifiedAt: DateTime
+  createdBy: String
+  modifiedBy: String
+}
+
+"""An engineering project in the document management system."""
+type EngineeringProject {
+  id: ID!
+  projectNumber: String!
+  name: String!
+  description: String
+  client: String
+  status: String!
+  startDate: DateTime
+  endDate: DateTime
+  documents(filter: DocumentFilter, first: Int, after: String): DocumentConnection!
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+# ─── Unit of Measure ─────────────────────────────────────────────────────────
+
+"""A unit of measure in the AVEVA system."""
+type UnitOfMeasure {
+  id: ID!
+  name: String!
+  abbreviation: String!
+  description: String
+  class: UnitOfMeasureClass!
+  conversionFactor: Float64
+  conversionOffset: Float64
+  referenceUnit: UnitOfMeasure
+}
+
+# ─── Filter Input Types ───────────────────────────────────────────────────────
+
+input PIPointFilter {
+  tagNameFilter: String
+  pointTypeFilter: PIPointType
+  descriptorFilter: String
+  engineeringUnitsFilter: String
+}
+
+input ElementFilter {
+  nameFilter: String
+  templateName: String
+  categoryName: String
+}
+
+input EventFrameFilter {
+  nameFilter: String
+  startTime: DateTime
+  endTime: DateTime
+  status: EventFrameStatus
+  templateName: String
+  elementName: String
+}
+
+input AnalysisFilter {
+  nameFilter: String
+  enabled: Boolean
+}
+
+input StreamFilter {
+  nameFilter: String
+  typeId: String
+}
+
+input ConnectAssetFilter {
+  nameFilter: String
+  assetType: String
+}
+
+input ScadaTagFilter {
+  nameFilter: String
+  equipmentName: String
+  cluster: String
+}
+
+input AlarmFilter {
+  severity: AlarmSeverity
+  state: AlarmState
+  area: String
+  startTime: DateTime
+  endTime: DateTime
+}
+
+input WorkOrderFilter {
+  status: WorkOrderStatus
+  productCode: String
+  startTimeAfter: DateTime
+  startTimeBefore: DateTime
+}
+
+input DocumentFilter {
+  status: DocumentStatus
+  documentType: String
+  discipline: String
+  nameFilter: String
+}
+
+# ─── Pagination Connection Types ──────────────────────────────────────────────
+
+type PIPointConnection {
+  edges: [PIPointEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+type PIPointEdge { node: PIPoint!; cursor: String! }
+
+type TimedValueConnection {
+  edges: [TimedValueEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+type TimedValueEdge { node: TimedValue!; cursor: String! }
+
+type ElementConnection {
+  edges: [ElementEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+type ElementEdge { node: Element!; cursor: String! }
+
+type ElementTemplateConnection {
+  edges: [ElementTemplateEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+type ElementTemplateEdge { node: ElementTemplate!; cursor: String! }
+
+type AssetAttributeConnection {
+  edges: [AssetAttributeEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+type AssetAttributeEdge { node: AssetAttribute!; cursor: String! }
+
+type AttributeTemplateConnection {
+  edges: [AttributeTemplateEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+type AttributeTemplateEdge { node: AttributeTemplate!; cursor: String! }
+
+type EventFrameConnection {
+  edges: [EventFrameEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+type EventFrameEdge { node: EventFrame!; cursor: String! }
+
+type EventFrameTemplateConnection {
+  edges: [EventFrameTemplateEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+type EventFrameTemplateEdge { node: EventFrameTemplate!; cursor: String! }
+
+type AFTableConnection {
+  edges: [AFTableEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+type AFTableEdge { node: AFTable!; cursor: String! }
+
+type AFTableRowConnection {
+  edges: [AFTableRowEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+type AFTableRowEdge { node: AFTableRow!; cursor: String! }
+
+type AFCategoryConnection {
+  edges: [AFCategoryEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+type AFCategoryEdge { node: AFCategory!; cursor: String! }
+
+type PIAFDatabaseConnection {
+  edges: [PIAFDatabaseEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+type PIAFDatabaseEdge { node: PIAFDatabase!; cursor: String! }
+
+type AnalysisConnection {
+  edges: [AnalysisEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+type AnalysisEdge { node: Analysis!; cursor: String! }
+
+type NotificationRuleConnection {
+  edges: [NotificationRuleEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+type NotificationRuleEdge { node: NotificationRule!; cursor: String! }
+
+type NamespaceConnection {
+  edges: [NamespaceEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+type NamespaceEdge { node: Namespace!; cursor: String! }
+
+type StreamConnection {
+  edges: [StreamEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+type StreamEdge { node: Stream!; cursor: String! }
+
+type StreamValueConnection {
+  edges: [StreamValueEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+type StreamValueEdge { node: StreamValue!; cursor: String! }
+
+type ConnectAssetConnection {
+  edges: [ConnectAssetEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+type ConnectAssetEdge { node: ConnectAsset!; cursor: String! }
+
+type DataViewConnection {
+  edges: [DataViewEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+type DataViewEdge { node: DataView!; cursor: String! }
+
+type TransferConfigurationConnection {
+  edges: [TransferConfigurationEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+type TransferConfigurationEdge { node: TransferConfiguration!; cursor: String! }
+
+type UserConnection {
+  edges: [UserEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+type UserEdge { node: User!; cursor: String! }
+
+type ScadaTagConnection {
+  edges: [ScadaTagEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+type ScadaTagEdge { node: ScadaTag!; cursor: String! }
+
+type AlarmConnection {
+  edges: [AlarmEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+type AlarmEdge { node: Alarm!; cursor: String! }
+
+type TrendConnection {
+  edges: [TrendEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+type TrendEdge { node: Trend!; cursor: String! }
+
+type WorkOrderConnection {
+  edges: [WorkOrderEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+type WorkOrderEdge { node: WorkOrder!; cursor: String! }
+
+type DocumentConnection {
+  edges: [DocumentEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+type DocumentEdge { node: EngineeringDocument!; cursor: String! }
+
+"""Standard Relay-style pagination info."""
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+# ─── Mutation Input Types ─────────────────────────────────────────────────────
+
+input CreatePIPointInput {
+  tag: String!
+  descriptor: String
+  pointType: PIPointType!
+  engineeringUnits: String
+  zero: Float64
+  span: Float64
+  step: Boolean
+  compressionEnabled: Boolean
+}
+
+input UpdatePIPointInput {
+  descriptor: String
+  engineeringUnits: String
+  zero: Float64
+  span: Float64
+  step: Boolean
+  compressionEnabled: Boolean
+  compressionDeviation: Float64
+}
+
+input WriteValueInput {
+  tag: String!
+  timestamp: DateTime!
+  value: JSON!
+}
+
+input CreateElementInput {
+  name: String!
+  description: String
+  templateName: String
+  parentPath: String
+  databaseId: ID!
+}
+
+input CreateEventFrameInput {
+  name: String!
+  description: String
+  startTime: DateTime!
+  endTime: DateTime
+  templateName: String
+  databaseId: ID!
+  primaryReferencedElementPath: String
+}
+
+input CloseEventFrameInput {
+  id: ID!
+  endTime: DateTime!
+}
+
+input CreateWorkOrderInput {
+  orderNumber: String!
+  description: String
+  productCode: String!
+  quantity: Float!
+  unitOfMeasure: String!
+  plannedStartTime: DateTime
+  plannedEndTime: DateTime
+  productionLineId: ID
+}
+
+input UpdateWorkOrderStatusInput {
+  id: ID!
+  status: WorkOrderStatus!
+  actualStartTime: DateTime
+  actualEndTime: DateTime
+}
+
+input RecordQualityResultInput {
+  workOrderId: ID!
+  parameterName: String!
+  measuredValue: Float!
+  unitOfMeasure: String
+  lowerLimit: Float
+  upperLimit: Float
+  measuredAt: DateTime
+}
+
+input AcknowledgeAlarmInput {
+  id: ID!
+  acknowledgedBy: String!
+  comment: String
+}
+
+input CreateStreamInput {
+  name: String!
+  description: String
+  typeId: String!
+  namespaceId: ID!
+}
+
+# ─── Root Types ───────────────────────────────────────────────────────────────
+
+type Query {
+  # PI Server
+  piServer(id: ID!): PIServer
+  piServers: [PIServer!]!
+
+  # PI Data Archive
+  piDataArchive(serverId: ID!): PIDataArchive
+  piPoint(id: ID!): PIPoint
+  piPointByTag(tag: String!, serverId: ID!): PIPoint
+  piPoints(serverId: ID!, filter: PIPointFilter, first: Int, after: String): PIPointConnection!
+
+  # PI Asset Framework
+  piAssetServer(serverId: ID!): PIAssetServer
+  piAFDatabase(id: ID!): PIAFDatabase
+  piAFDatabases(serverId: ID!, first: Int, after: String): PIAFDatabaseConnection!
+  element(id: ID!): Element
+  elementByPath(path: String!, databaseId: ID!): Element
+  elements(databaseId: ID!, filter: ElementFilter, first: Int, after: String): ElementConnection!
+  elementTemplate(id: ID!): ElementTemplate
+  elementTemplates(databaseId: ID!, first: Int, after: String): ElementTemplateConnection!
+  eventFrame(id: ID!): EventFrame
+  eventFrames(databaseId: ID!, filter: EventFrameFilter, first: Int, after: String): EventFrameConnection!
+  eventFrameTemplate(id: ID!): EventFrameTemplate
+
+  # PI Analysis
+  analysis(id: ID!): Analysis
+  analyses(serverId: ID!, filter: AnalysisFilter, first: Int, after: String): AnalysisConnection!
+
+  # AVEVA CONNECT
+  tenant(id: ID!): Tenant
+  tenants: [Tenant!]!
+  namespace(id: ID!): Namespace
+  namespaces(tenantId: ID!, first: Int, after: String): NamespaceConnection!
+  stream(id: ID!): Stream
+  streams(namespaceId: ID!, filter: StreamFilter, first: Int, after: String): StreamConnection!
+  streamType(id: ID!): StreamType
+  connectAsset(id: ID!): ConnectAsset
+  connectAssets(namespaceId: ID!, filter: ConnectAssetFilter, first: Int, after: String): ConnectAssetConnection!
+  dataView(id: ID!): DataView
+  dataViews(namespaceId: ID!, first: Int, after: String): DataViewConnection!
+
+  # Identity & Access
+  user(id: ID!): User
+  users(tenantId: ID!, first: Int, after: String): UserConnection!
+  role(id: ID!): Role
+  roles: [Role!]!
+  apiClient(id: ID!): ApiClient
+
+  # Plant SCADA
+  scadaProject(id: ID!): ScadaProject
+  scadaProjects: [ScadaProject!]!
+  scadaTag(id: ID!): ScadaTag
+  scadaTags(projectId: ID!, filter: ScadaTagFilter, first: Int, after: String): ScadaTagConnection!
+  alarm(id: ID!): Alarm
+  alarms(projectId: ID!, filter: AlarmFilter, first: Int, after: String): AlarmConnection!
+
+  # MES
+  workOrder(id: ID!): WorkOrder
+  workOrders(productionLineId: ID, filter: WorkOrderFilter, first: Int, after: String): WorkOrderConnection!
+  productionLine(id: ID!): ProductionLine
+  productionLines: [ProductionLine!]!
+  equipment(id: ID!): Equipment
+  material(id: ID!): Material
+  materials(first: Int, after: String): [Material!]!
+
+  # Engineering Document Management
+  engineeringDocument(id: ID!): EngineeringDocument
+  engineeringDocuments(projectId: ID!, filter: DocumentFilter, first: Int, after: String): DocumentConnection!
+  engineeringProject(id: ID!): EngineeringProject
+  engineeringProjects: [EngineeringProject!]!
+
+  # Unit of Measure
+  unitOfMeasure(id: ID!): UnitOfMeasure
+  unitsOfMeasure(class: UnitOfMeasureClass): [UnitOfMeasure!]!
+}
+
+type Mutation {
+  # PI Points
+  createPIPoint(serverId: ID!, input: CreatePIPointInput!): PIPoint!
+  updatePIPoint(id: ID!, input: UpdatePIPointInput!): PIPoint!
+  deletePIPoint(id: ID!): Boolean!
+  writeValue(input: WriteValueInput!): TimedValue!
+  writeValues(inputs: [WriteValueInput!]!): [TimedValue!]!
+
+  # PI AF Elements
+  createElement(input: CreateElementInput!): Element!
+  updateElement(id: ID!, name: String, description: String): Element!
+  deleteElement(id: ID!): Boolean!
+
+  # PI AF Event Frames
+  createEventFrame(input: CreateEventFrameInput!): EventFrame!
+  closeEventFrame(input: CloseEventFrameInput!): EventFrame!
+  deleteEventFrame(id: ID!): Boolean!
+
+  # AVEVA CONNECT Streams
+  createStream(input: CreateStreamInput!): Stream!
+  deleteStream(id: ID!): Boolean!
+  insertStreamValue(streamId: ID!, timestamp: DateTime!, value: JSON!): StreamValue!
+  insertStreamValues(streamId: ID!, values: [WriteValueInput!]!): [StreamValue!]!
+  deleteStreamValues(streamId: ID!, startIndex: DateTime!, endIndex: DateTime!): Boolean!
+
+  # Work Orders (MES)
+  createWorkOrder(input: CreateWorkOrderInput!): WorkOrder!
+  updateWorkOrderStatus(input: UpdateWorkOrderStatusInput!): WorkOrder!
+  recordQualityResult(input: RecordQualityResultInput!): QualityResult!
+
+  # Alarms
+  acknowledgeAlarm(input: AcknowledgeAlarmInput!): Alarm!
+  shelveAlarm(id: ID!, duration: Int!, comment: String): Alarm!
+  unshelveAlarm(id: ID!): Alarm!
+}
+
+type Subscription {
+  """Stream real-time values for a PI Point."""
+  piPointValue(tag: String!, serverId: ID!): TimedValue!
+
+  """Stream real-time values for multiple PI Points."""
+  piPointValues(tags: [String!]!, serverId: ID!): TimedValue!
+
+  """Stream new or updated event frames."""
+  eventFrameCreated(databaseId: ID!): EventFrame!
+
+  """Stream alarm state changes."""
+  alarmChanged(projectId: ID!, severity: AlarmSeverity): Alarm!
+
+  """Stream real-time values from an AVEVA CONNECT stream."""
+  streamValue(streamId: ID!): StreamValue!
+
+  """Stream work order status changes."""
+  workOrderStatusChanged(productionLineId: ID): WorkOrder!
+}
