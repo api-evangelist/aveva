@@ -65,6 +65,12 @@ apis:
   - url: https://docs.aveva.com/
     type: Portal
 common:
+- type: TrustCenter
+  url: security/aveva-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/aveva-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/aveva-domain-security.yml
 - type: Website
   url: https://www.aveva.com
 - type: Documentation
