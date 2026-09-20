@@ -31,6 +31,9 @@ description: AVEVA is an industrial software company (a subsidiary of Schneider 
   for industrial data integration, asset management, and operational analytics.
 type: Index
 url: https://raw.githubusercontent.com/api-evangelist/aveva/refs/heads/main/apis.yml
+x-docs-platform: redoc
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-09-19
 tags:
 - SCADA
 - MES
