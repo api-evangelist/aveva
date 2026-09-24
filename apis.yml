@@ -40,9 +40,19 @@ tags:
 - Industrial Automation
 - Manufacturing
 - Industrial IoT
+- Industrial Data
+- Energy
+- Industrial
+tags_raw:
+- SCADA
+- MES
+- Industrial Automation
+- Manufacturing
+- Industrial IoT
 - IIoT
 - Industrial Data
 - Energy
+- Industrial
 created: '2026-06-05'
 modified: '2026-06-05'
 specificationVersion: '0.23'
@@ -67,8 +77,6 @@ apis:
     type: Documentation
   - url: https://www.aveva.com/en/products/aveva-pi-system-developer-technologies/
     type: Portal
-  - url: graphql/aveva-graphql.md
-    type: GraphQL
 - aid: aveva:aveva-pi-system-rest-api
   name: AVEVA PI System REST API
   description: The AVEVA PI System REST API (PI Web API) provides RESTful HTTP access
