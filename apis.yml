@@ -1,4 +1,5 @@
 aid: aveva
+
 deliveryModel:
   model: saas
   open_source: false
@@ -10,6 +11,7 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+
 accessModel:
   pricing: unknown
   onboarding: unknown
@@ -21,19 +23,28 @@ accessModel:
   source: []
   generated: '2026-07-22'
   method: derived
+
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/aveva.png
+
 name: AVEVA
+
 description: AVEVA is an industrial software company (a subsidiary of Schneider Electric)
   providing engineering, operations, and data management software for energy, utilities,
   marine, and manufacturing industries. AVEVA's product portfolio includes System
   Platform (unified SCADA/MES/IIoT), Plant SCADA, MES, Edge, PI System (industrial
   data infrastructure), and CONNECT cloud services, all of which expose REST APIs
   for industrial data integration, asset management, and operational analytics.
+
 type: Index
+
 url: https://raw.githubusercontent.com/api-evangelist/aveva/refs/heads/main/apis.yml
+
 x-docs-platform: redoc
+
 x-docs-platform-confidence: medium
+
 x-docs-platform-checked: 2026-09-19
+
 tags:
 - SCADA
 - MES
@@ -43,6 +54,7 @@ tags:
 - Industrial Data
 - Energy
 - Industrial
+
 tags_raw:
 - SCADA
 - MES
@@ -53,9 +65,75 @@ tags_raw:
 - Industrial Data
 - Energy
 - Industrial
+
 created: '2026-06-05'
+
 modified: '2026-06-05'
+
 specificationVersion: '0.23'
+
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+
+common:
+- type: Newsroom
+  url: https://www.aveva.com/en/about/news/
+- type: JSONLD
+  url: json-ld/aveva-context.jsonld
+- type: Vocabulary
+  url: vocabulary/aveva-vocabulary.yml
+- type: Security
+  url: security/aveva-vulnerability-disclosure.yml
+- type: LLMsTxt
+  url: llms/aveva-llms.txt
+- type: SecurityTxt
+  url: well-known/aveva-security.txt
+- type: WellKnown
+  url: well-known/aveva-well-known.yml
+- type: Hosts
+  url: hosts/aveva-hosts.yml
+- type: Vendors
+  url: vendors/aveva-vendors.yml
+- type: SDKs
+  url: packages/aveva-packages.yml
+- type: Packages
+  url: packages/aveva-packages.yml
+- type: Leadership
+  url: https://www.aveva.com/en/about/about-aveva/leadership/
+- type: TrustCenter
+  url: security/aveva-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/aveva-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/aveva-domain-security.yml
+- type: Website
+  url: https://www.aveva.com
+- type: GitHubOrganization
+  url: https://github.com/aveva
+- type: ChangeLog
+  url: https://docs.aveva.com/bundle/product-release-notes
+- type: APIReference
+  url: https://docs.aveva.com/bundle/pi-web-api-reference/page/help.html
+- type: PrivacyPolicy
+  url: https://www.aveva.com/en/legal/privacy-policy/
+- type: TermsOfService
+  url: https://www.aveva.com/en/legal/terms-of-use/
+- type: Login
+  url: https://community.aveva.com/login?ReturnUrl=%2F
+- type: Documentation
+  url: https://docs.aveva.com/
+- type: Blog
+  url: https://www.aveva.com/en/perspectives/blog/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/aveva
+- type: About
+  url: https://www.aveva.com/en/about/
+- type: Support
+  url: https://www.aveva.com/en/support/
+- type: Pricing
+  url: https://www.aveva.com/en/contact/
+
 apis:
 - aid: aveva:aveva-connect-rest-api
   name: AVEVA CONNECT REST API
@@ -98,31 +176,23 @@ apis:
     type: Documentation
   - url: https://docs.aveva.com/
     type: Portal
-common:
-- type: TrustCenter
-  url: security/aveva-trust-center.yml
-- type: VulnerabilityDisclosure
-  url: security/aveva-vulnerability-disclosure.yml
-- type: DomainSecurity
-  url: security/aveva-domain-security.yml
-- type: Website
-  url: https://www.aveva.com
-- type: Documentation
-  url: https://docs.aveva.com/
-- type: Blog
-  url: https://www.aveva.com/en/perspectives/blog/
-- type: LinkedIn
-  url: https://www.linkedin.com/company/aveva
-- type: YouTube
-  url: https://www.youtube.com/@AVEVASoftware
-- type: About
-  url: https://www.aveva.com/en/about/
-- type: Support
-  url: https://www.aveva.com/en/support/
-- type: Pricing
-  url: https://www.aveva.com/en/contact/
-- type: Newsroom
-  url: https://www.aveva.com/en/perspectives/news/
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+
+x-coverage:
+  state: gated
+  reason: customer-only-docs
+  method: derived
+  generated: '2026-10-20'
+  generator: derive-coverage.py (pre-flight evidence)
+  detail: >-
+    the company publishes developer documentation but serves no machine-readable contract from it; its MCP
+    endpoint (api.connect.aveva.com/mcp) answers 403, so access sits behind a customer login
+  evidence:
+  - url: https://api.connect.aveva.com/mcp
+    status: 403
+  - url: https://www.aveva.com
+    status: 200
+x-enrichment:
+  date: '2026-10-20'
+  status: enriched
+  artifacts_added: 3
+  pass: local-v5

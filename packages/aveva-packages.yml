@@ -1,0 +1,32 @@
+name: AVEVA packages
+generated: '2026-10-20'
+method: searched
+source: https://api.nuget.org/v3/registration5-gz-semver2/aveva.afsdk/index.json
+packages:
+- name: Aveva.AFSDK
+  registry: nuget
+  url: https://www.nuget.org/packages/Aveva.AFSDK
+  language: csharp
+  official: false
+  version: 3.3.0
+  published: '2026-09-22'
+  note: PI AF SDK client library; NuGet owner Nuget-AvevaOrg-SVC, authors "AVEVA Group Limited and its subsidiaries".
+  ownership_audit: 'registry metadata names neither the provider''s domain nor its GitHub org: official downgraded (harvest-packages.py --audit)'
+- name: adh-sample-library-preview
+  registry: pypi
+  url: https://pypi.org/project/adh-sample-library-preview/
+  language: python
+  official: true
+  version: 0.10.19rc0
+  published: '2025-10-23'
+  note: Preview sample client library for AVEVA Data Hub (CONNECT data services) REST APIs; home page github.com/aveva/sample-adh-sample_libraries-python.
+  ownership_audit: metadata names aveva.com
+- name: omf-sample-library-preview
+  registry: pypi
+  url: https://pypi.org/project/omf-sample-library-preview/
+  language: python
+  official: true
+  version: 0.1.2rc0
+  published: '2025-01-22'
+  note: Preview OMF (OSIsoft Message Format) sample library; home page github.com/aveva/sample-omf_library_preview-python.
+  ownership_audit: metadata names aveva.com

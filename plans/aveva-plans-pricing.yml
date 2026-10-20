@@ -1,0 +1,10 @@
+name: AVEVA pricing
+generated: '2026-10-20'
+method: none
+source: https://www.aveva.com/en/contact/
+audience: business-product
+pricing_basis: negotiated
+published: false
+plan_count: 0
+plans: []
+note: AVEVA publishes no API or product price list; the Pricing pointer resolves to a contact/sales form.

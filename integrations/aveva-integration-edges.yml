@@ -1,0 +1,16 @@
+generated: '2026-10-20'
+method: none
+source:
+- https://zapier.com/apps/aveva/integrations
+- https://n8n.io/integrations/aveva/
+- https://composio.dev/toolkits/aveva
+- https://monid.ai/tools/aveva
+checked:
+- https://composio.dev/toolkits/aveva
+- https://monid.ai/tools/aveva
+- https://n8n.io/integrations/aveva/
+- https://zapier.com/apps/aveva/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []

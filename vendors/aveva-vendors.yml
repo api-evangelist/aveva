@@ -1,0 +1,72 @@
+generated: '2026-10-20'
+method: probed
+source: pre-flight dossier (docs platform, portal detections) + CNAME chains and response headers of the hosts apis.yml names
+registry: all/0-working/vendors.yml
+areas_vocabulary:
+- documentation
+- developer-portal
+- api-gateway
+- cdn
+- hosting
+- sdk-generation
+- api-collections
+- status-page
+- support
+- community
+- identity
+- mcp-hosting
+vendors:
+- vendor: aws-api-gateway
+  name: Amazon API Gateway
+  area: api-gateway
+  host: api.connect.aveva.com
+  evidence: header:x-amz-apigw-id
+  signal: header
+  confidence: high
+  kin_score: []
+- vendor: cloudflare
+  name: Cloudflare
+  area: cdn
+  host: www.aveva.com
+  evidence: header:cf-ray
+  signal: header
+  confidence: high
+  kin_score:
+  - https_enforced
+  - hsts
+- vendor: cloudfront
+  name: Amazon CloudFront
+  area: cdn
+  host: api.connect.aveva.com
+  evidence: header:x-amz-cf-id
+  signal: header
+  confidence: high
+  kin_score: []
+- vendor: redoc
+  name: Redoc (self-hosted)
+  area: documentation
+  host: docs.aveva.com
+  evidence: markup:redoc
+  signal: docs-platform
+  confidence: medium
+  kin_score:
+  - openapi_published
+reliance:
+  areas_vendor_served:
+  - api-gateway
+  - cdn
+  - documentation
+  vendor_count: 4
+  areas_observed: 12
+  share_of_observable_areas: 0.25
+  note: areas where a third party was DETECTED serving this provider; an area absent here was either self-run or not observed, and this script
+    cannot tell those apart
+checked:
+- 'docs-platform: redoc'
+- www.aveva.com (Website)
+- docs.aveva.com (APIReference)
+- community.aveva.com (Login)
+- docs.aveva.com (Documentation)
+- www.aveva.com (Support)
+- api.connect.aveva.com (baseURL)
+- '{pi-server} (baseURL)'

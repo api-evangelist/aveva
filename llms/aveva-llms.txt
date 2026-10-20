@@ -1,0 +1,178 @@
+# AVEVA - Global Leader in Industrial Software
+
+At AVEVA, we work with you and harness the power of our ecosystem, to deliver solutions and expertise to optimize engineering, operations and performance.
+
+## Accessibility and Navigation
+- [website accessibility](https://userway.org/): Information on how to access AVEVA's website for users with disabilities.
+- [Skip to main content](https://www.aveva.com/#main-content): A link to quickly navigate to the main content of the website.
+
+## Partnerships and Academia
+- [Partners](https://www.aveva.com/en/about/partners/): Details about AVEVA's partnerships and collaborations with other organizations.
+- [Academia](https://www.aveva.com/en/academia/): Information on AVEVA's engagement with academic institutions.
+
+## Training and Support
+- [Training](https://www.aveva.com/en/training/): Overview of training programs offered by AVEVA to enhance user skills.
+- [Support and Success](https://www.aveva.com/en/support-and-success/): Resources and support options available for AVEVA users.
+- [Contact Us](https://www.aveva.com/en/contact/): Contact information for inquiries and support.
+
+## User Access
+- [CONNECT Sign In](https://connect.aveva.com/#/login): Portal for users to sign in to their CONNECT accounts.
+
+## Language Options
+- [English](https://www.aveva.com/en/): English language option for the website.
+- [Chinese](https://www.aveva.cn/): Chinese language option for the website.
+- [German](https://www.aveva.com/de-de/): German language option for the website.
+- [French](https://www.aveva.com/fr-fr/): French language option for the website.
+- [Japanese](https://www.aveva.com/ja-jp/): Japanese language option for the website.
+- [Korean](https://www.aveva.com/ko-kr/): Korean language option for the website.
+- [Portuguese](https://www.aveva.com/pt-br/): Portuguese language option for the website.
+- [Spanish](https://www.aveva.com/es-es/): Spanish language option for the website.
+
+## Solutions Overview
+- [Solutions](https://www.aveva.com/en/solutions/): A comprehensive overview of AVEVA's solutions for various industries.
+- [AI](https://www.aveva.com/en/solutions/digital-transformation/artificial-intelligence/): Information on AVEVA's artificial intelligence solutions.
+- [Cloud](https://www.aveva.com/en/solutions/digital-transformation/industrial-cloud-platform/): Overview of cloud-based solutions offered by AVEVA.
+- [Connected Worker](https://www.aveva.com/en/solutions/digital-transformation/connected-worker/): Solutions aimed at enhancing worker connectivity and productivity.
+- [Digital Twin](https://www.aveva.com/en/solutions/digital-transformation/digital-twin/): Information on AVEVA's digital twin technology.
+- [Edge](https://www.aveva.com/en/solutions/digital-transformation/edge-management/): Overview of edge computing solutions.
+- [Extended Reality](https://www.aveva.com/en/solutions/digital-transformation/xr/): Information on AVEVA's extended reality offerings.
+- [IIoT](https://www.aveva.com/en/solutions/digital-transformation/industrial-internet-of-things/): Overview of Industrial Internet of Things solutions.
+
+## Engineering Solutions
+- [Engineering](https://www.aveva.com/en/solutions/engineering/): General information on AVEVA's engineering solutions.
+- [Construction Project Management](https://www.aveva.com/en/solutions/engineering/construction-project-management/): Tools and solutions for managing construction projects.
+- [Engineering and Design](https://www.aveva.com/en/solutions/engineering/engineering-and-design/): Solutions for engineering design processes.
+- [Engineering Data Management](https://www.aveva.com/en/solutions/data-management/engineering-data-management/): Tools for managing engineering data.
+- [Simulation](https://www.aveva.com/en/solutions/engineering/simulation/): Overview of simulation solutions offered by AVEVA.
+
+## Industrial Training
+- [Industrial Training](https://www.aveva.com/en/solutions/engineering/industrial-training/): Training programs focused on industrial applications.
+
+## Asset Management
+- [Asset Lifecycle Management](https://www.aveva.com/en/solutions/engineering/asset-lifecycle-management/): Solutions for managing the lifecycle of assets.
+- [Operations](https://www.aveva.com/en/solutions/operations/): Overview of operational solutions.
+- [Operations Control](https://www.aveva.com/en/solutions/operations/operations-control-hmi/): Tools for controlling operations effectively.
+- [Production Optimization](https://www.aveva.com/en/solutions/operations/production-optimization/): Solutions aimed at optimizing production processes.
+- [Asset Performance Management](https://www.aveva.com/en/solutions/operations/asset-performance-management/): Tools for managing asset performance.
+
+## SCADA and HMI
+- [SCADA](https://www.aveva.com/en/solutions/operations/scada/): Overview of Supervisory Control and Data Acquisition systems.
+- [HMI](https://www.aveva.com/en/solutions/operations/hmi/): Information on Human-Machine Interface solutions.
+
+## Supply Chain and Data Management
+- [Supply Chain](https://www.aveva.com/en/solutions/operations/supply-chain-performance/): Solutions for managing supply chain operations.
+- [Data Management](https://www.aveva.com/en/solutions/data-management/): Overview of data management solutions.
+- [Data Sharing](https://www.aveva.com/en/solutions/data-management/data-sharing/): Tools for sharing data across platforms.
+- [Operations Data Management](https://www.aveva.com/en/solutions/data-management/operations-data-management/): Solutions for managing operational data.
+- [Data Enrichment and Analysis](https://www.aveva.com/en/solutions/data-management/data-enrichment-and-analysis/): Tools for enriching and analyzing data.
+- [Data Visualization](https://www.aveva.com/en/solutions/data-visualization/): Overview of data visualization tools.
+- [Enterprise Visualization](https://www.aveva.com/en/solutions/data-visualization/enterprise-visualization/): Solutions for enterprise-level data visualization.
+- [Engineering Data Visualization](https://www.aveva.com/en/solutions/data-visualization/engineering-data-visualization/): Tools for visualizing engineering data.
+- [Operations Data Visualization](https://www.aveva.com/en/solutions/data-visualization/operations-data-visualization/): Solutions for visualizing operational data.
+
+## CONNECT Platform
+- [CONNECT](https://www.aveva.com/en/connect-experience/): Overview of the CONNECT platform.
+- [CONNECT Blog](https://www.aveva.com/en/connect-experience/connect-search/#sortCriteria=%40atomicstartdate%20descending&f-coveo_contenttype=Blog%20Post&cf-coveo_solution=CONNECT): Blog featuring updates and insights related to AVEVA's offerings.
+- [Subscription Options](https://www.aveva.com/en/solutions/flex-subscription/): Information on subscription options for AVEVA services.
+
+## Products
+- [Products](https://www.aveva.com/en/products/): Overview of AVEVA's product offerings.
+- [AVEVA PI System](https://www.aveva.com/en/products/aveva-pi-system/): Information on the AVEVA PI System for data management.
+- [AVEVA Unified Engineering](https://www.aveva.com/en/products/unified-engineering/): Overview of unified engineering solutions.
+- [AVEVA Operations Control](https://www.aveva.com/en/products/aveva-operations-control/): Tools for operational control.
+- [AVEVA E3D Design](https://www.aveva.com/en/products/e3d-design/): Information on the E3D design software.
+- [AVEVA Asset Information Management](https://www.aveva.com/en/products/asset-information-management/): Solutions for managing asset information.
+- [AVEVA Process Simulation](https://www.aveva.com/en/products/process-simulation/): Overview of process simulation tools.
+- [AVEVA Enterprise Resource Management](https://www.aveva.com/en/products/enterprise-resource-management/): Solutions for enterprise resource management.
+- [AVEVA System Platform](https://www.aveva.com/en/products/system-platform/): Overview of the AVEVA System Platform.
+- [AVEVA InTouch HMI](https://www.aveva.com/en/products/intouch-hmi/): Information on the InTouch HMI software.
+- [AVEVA Manufacturing Execution System](https://www.aveva.com/en/products/manufacturing-execution-system/): Overview of manufacturing execution systems.
+- [AVEVA Predictive Analytics](https://www.aveva.com/en/products/predictive-analytics/): Tools for predictive analytics.
+- [AVEVA Enterprise SCADA](https://www.aveva.com/en/products/enterprise-scada/): Information on enterprise-level SCADA solutions.
+- [AVEVA Plant SCADA](https://www.aveva.com/en/products/plant-scada/): Overview of plant SCADA systems.
+- [AVEVA Production Management](https://www.aveva.com/en/products/production-management/): Solutions for managing production processes.
+- [AVEVA PI Data Infrastructure](https://www.aveva.com/en/products/pi-data-infrastructure/): Overview of data infrastructure for the PI System.
+- [AVEVA PI Server](https://www.aveva.com/en/products/aveva-pi-server/): Information on the PI Server.
+- [AVEVA Historian](https://www.aveva.com/en/products/historian/): Overview of the AVEVA Historian for data storage.
+- [AVEVA Edge Data Store](https://www.aveva.com/en/products/aveva-edge-data-store/): Information on edge data storage solutions.
+- [AVEVA Point Cloud Manager](https://www.aveva.com/en/products/point-cloud-manager/): Tools for managing point cloud data.
+- [AVEVA PI Vision](https://www.aveva.com/en/products/aveva-pi-vision/): Overview of the PI Vision tool for data visualization.
+- [AVEVA Insight](https://www.aveva.com/en/products/insight/): Information on AVEVA Insight for data analysis.
+- [AVEVA Unified Operations Center](https://www.aveva.com/en/products/unified-operations-center/): Overview of the unified operations center.
+
+## Industry Solutions
+- [Industries](https://www.aveva.com/en/industries/): Overview of industries served by AVEVA.
+- [Chemicals](https://www.aveva.com/en/industries/chemicals/): Solutions for the chemicals industry.
+- [Basic Chemicals](https://www.aveva.com/en/industries/chemicals/basic-chemicals/): Information on solutions for basic chemicals.
+- [Specialty Chemicals](https://www.aveva.com/en/industries/chemicals/specialty-chemicals/): Overview of solutions for specialty chemicals.
+- [Engineering, Procurement and Construction](https://www.aveva.com/en/industries/epc/): Solutions for EPC projects.
+- [Infrastructure](https://www.aveva.com/en/industries/infrastructure/): Overview of infrastructure solutions.
+- [Cities and Facilities Management](https://www.aveva.com/en/industries/infrastructure/cities-and-facility-management/): Solutions for managing cities and facilities.
+- [Data Centers](https://www.aveva.com/en/industries/infrastructure/data-centers/): Information on solutions for data centers.
+- [Federal](https://www.aveva.com/en/industries/infrastructure/federal/): Overview of solutions for federal projects.
+- [Transmission and Distribution](https://www.aveva.com/en/industries/power-utilities/transmission-distribution/): Solutions for transmission and distribution.
+- [Water and Wastewater](https://www.aveva.com/en/industries/infrastructure/water-wastewater/): Overview of solutions for water and wastewater management.
+- [Manufacturing](https://www.aveva.com/en/industries/manufacturing/): Solutions for the manufacturing sector.
+- [Consumer Products](https://www.aveva.com/en/industries/manufacturing/consumer-products/): Information on solutions for consumer products.
+- [Discrete Manufacturing](https://www.aveva.com/en/industries/manufacturing/discrete-manufacturing/): Overview of discrete manufacturing solutions.
+- [Life Sciences](https://www.aveva.com/en/industries/manufacturing/life-sciences/): Solutions for the life sciences industry.
+- [Pulp and Paper](https://www.aveva.com/en/industries/manufacturing/pulp-paper/): Information on solutions for the pulp and paper industry.
+- [Ship Building](https://www.aveva.com/en/industries/manufacturing/ship-building/): Overview of solutions for shipbuilding.
+- [Marine](https://www.aveva.com/en/industries/marine/): Solutions for the marine industry.
+- [Ports](https://www.aveva.com/en/industries/marine/ports/): Information on port management solutions.
+- [Ship Operations](https://www.aveva.com/en/industries/marine/ship-operations/): Overview of solutions for ship operations.
+- [Mining, Metals and Minerals](https://www.aveva.com/en/industries/mining-metal-minerals/): Solutions for the mining and metals industry.
+- [Metals](https://www.aveva.com/en/industries/mining-metal-minerals/metals/): Information on solutions for the metals sector.
+- [Mining](https://www.aveva.com/en/industries/mining-metal-minerals/mining/): Overview of mining solutions.
+- [Oil, Gas and Energy](https://www.aveva.com/en/industries/oil-gas/): Solutions for the oil, gas, and energy sectors.
+- [Upstream](https://www.aveva.com/en/industries/oil-gas/upstream/): Information on upstream oil and gas solutions.
+- [Pipeline](https://www.aveva.com/en/industries/oil-gas/pipeline/): Overview of pipeline management solutions.
+- [LNG](https://www.aveva.com/en/industries/oil-gas/lng/): Solutions for liquefied natural gas.
+- [Gas Processing](https://www.aveva.com/en/industries/oil-gas/gas-processing/): Information on gas processing solutions.
+- [Downstream](https://www.aveva.com/en/industries/oil-gas/downstream/): Overview of downstream oil and gas solutions.
+- [Hydrogen](https://www.aveva.com/en/industries/oil-gas/hydrogen/): Solutions related to hydrogen production and management.
+- [Power and Utilities](https://www.aveva.com/en/industries/power-utilities/): Information on solutions for power and utilities.
+- [Power Generation](https://www.aveva.com/en/industries/power-utilities/power-generation/): Overview of power generation solutions.
+- [Renewables](https://www.aveva.com/en/industries/power-utilities/renewables/): Solutions for renewable energy sources.
+- [Transportation](https://www.aveva.com/en/industries/transportation/): Information on transportation solutions.
+- [Resources](https://www.aveva.com/en/perspectives/): Overview of resource management solutions.
+
+## Community and Engagement
+- [AVEVA World Presentations](https://www.aveva.com/en/perspectives/#f-coveo_contenttype=Presentation): Presentations from AVEVA World events.
+- [Our Industrial Life](https://www.aveva.com/en/our-industrial-life/): Insights into industrial life and practices.
+- [Blogs](https://www.aveva.com/en/perspectives/#f-coveo_contenttype=Blog%20Post): Collection of blogs related to AVEVA's offerings.
+- [Events](https://www.aveva.com/en/about/events/#sortCriteria=%40atomicstartdate%20descending): Information on upcoming events hosted by AVEVA.
+- [Webinars](https://www.aveva.com/en/about/events/#sortCriteria=%40atomicstartdate%20descending&f-sfpmi_channel_type__c=Webinar,Webinar%20External): Overview of webinars available for learning.
+- [Podcasts](https://www.aveva.com/en/our-industrial-life/type/podcast/): Collection of podcasts discussing industry topics.
+- [Success Stories](https://www.aveva.com/en/perspectives/#f-coveo_contenttype=Success%20Story): Case studies showcasing successful implementations.
+- [White Papers](https://www.aveva.com/en/perspectives/#f-coveo_contenttype=White%20Paper): In-depth papers on various industry topics.
+- [Documentation](https://docs.aveva.com/): Access to AVEVA's documentation resources.
+
+## Partnering and Collaboration
+- [Find a Partner](https://www.aveva.com/en/about/partners/work-with-a-partner/): Tool for finding AVEVA partners.
+- [Portal Login](https://partners.aveva.com/English/): Login portal for partners.
+- [Become a Partner](https://www.aveva.com/en/about/partners/become-a-partner/): Information on how to become an AVEVA partner.
+
+## Company Information
+- [About Us](https://www.aveva.com/en/about/): General information about AVEVA.
+- [About AVEVA](https://www.aveva.com/en/about/about-aveva/): Detailed overview of AVEVA's mission and vision.
+- [Action for Good](https://www.aveva.com/en/about/careers/action-for-good/): AVEVA's initiatives for social responsibility.
+- [Our Global Inclusive Culture](https://www.aveva.com/en/about/about-aveva/inclusive-culture/): Information on AVEVA's inclusive workplace culture.
+- [Leadership](https://www.aveva.com/en/about/about-aveva/leadership/): Overview of AVEVA's leadership team.
+- [Global Offices](https://www.aveva.com/en/about/about-aveva/locations/): Information on AVEVA's global office locations.
+- [Careers](https://www.aveva.com/en/about/careers/): Job opportunities and career information.
+- [Early Careers](https://www.aveva.com/en/about/careers/early-careers/): Programs for early career professionals.
+- [Benefits](https://www.aveva.com/en/about/careers/benefits/): Overview of employee benefits at AVEVA.
+- [R&D Careers](https://www.aveva.com/en/about/careers/r-and-d-careers/): Opportunities in research and development.
+- [Current Opportunities](https://aveva.wd3.myworkdayjobs.com/AVEVA_careers): List of current job openings.
+
+## News and Sustainability
+- [News and Press](https://www.aveva.com/en/about/news/): Latest news and press releases from AVEVA.
+- [Newsroom](https://www.aveva.com/en/about/news/press-releases/#sortCriteria=%40atomicstartdate%20descending): Access to AVEVA's newsroom for updates.
+- [Press Contacts](https://www.aveva.com/en/about/news/press-contacts/): Contact information for press inquiries.
+- [Investors](https://www.aveva.com/en/about/investors/): Information for investors regarding AVEVA.
+- [Sustainability](https://www.aveva.com/en/about/sustainability/): Overview of AVEVA's sustainability initiatives.
+- [Impact Stories](https://www.aveva.com/en/about/sustainability/impact-stories/): Stories showcasing AVEVA's impact.
+- [ESG Reporting](https://www.aveva.com/en/about/sustainability/esg-reporting/): Environmental, Social, and Governance reporting.
+- [Global Collaboration](https://www.aveva.com/en/about/sustainability/global-collaboration/): Information on AVEVA's collaborative efforts.
+
