@@ -1,4 +1,4 @@
-# AVEVA (aveva)
+# AVEVA
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,83 +66,117 @@
 
 AVEVA is an industrial software company (a subsidiary of Schneider Electric) providing engineering, operations, and data management software for energy, utilities, marine, and manufacturing industries. AVEVA's product portfolio includes System Platform (unified SCADA/MES/IIoT), Plant SCADA, MES, Edge, PI System (industrial data infrastructure), and CONNECT cloud services, all of which expose REST APIs for industrial data integration, asset management, and operational analytics.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/aveva/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/aveva/refs/heads/main/apis.yml)
+**Areas:** SCADA · MES · Industrial Automation · Manufacturing · Industrial IoT · Industrial Data · Energy · Industrial
 
-## Scope
+## AVEVA on APIs.io
 
-- **Type:** Index
+Everything profiled for AVEVA is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/aveva/](https://apis.io/providers/aveva/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (2)
 
-- SCADA
-- MES
-- Industrial Automation
-- Manufacturing
-- Industrial IoT
-- IIoT
-- Industrial Data
-- Energy
+- [AVEVA CONNECT REST API](https://apis.io/apis/aveva/aveva-connect-rest-api/) — The AVEVA CONNECT cloud platform REST APIs provide access to industrial data services including account management, identity management, data ingress…
+- [AVEVA PI System REST API](https://apis.io/apis/aveva/aveva-pi-system-rest-api/) — The AVEVA PI System REST API (PI Web API) provides RESTful HTTP access to time- series sensor data, asset metadata, and event frames stored in PI Server.…
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-06-05
-- **Modified:** 2026-06-05
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### GraphQL (1)
 
-### AVEVA CONNECT REST API
+GraphQL schemas.
 
-The AVEVA CONNECT cloud platform REST APIs provide access to industrial data services including account management, identity management, data ingress pipelines, data views, and time-series retrieval. Enables cloud-native integration of OT data from AVEVA System Platform, Plant SCADA, and PI System into analytics and enterprise applications.
+- [Moved to /providers/aveva/](https://apis.io/graphqls/aveva/aveva-graphql/)
 
-- **Human URL:** [https://docs.aveva.com/](https://docs.aveva.com/)
-- **Base URL:** `https://api.connect.aveva.com`
+#### JSON-LD (1)
 
-#### Tags
+Linked-data contexts for the provider's vocabulary.
 
-- Industrial Data
-- Time Series
-- Asset Management
-- Cloud
-- REST
+- [Aveva Context](https://apis.io/jsonld/aveva/aveva-context/)
 
-#### Properties
+#### Vocabulary (1)
 
-- [Documentation](https://docs.aveva.com/)
-- [Portal](https://www.aveva.com/en/products/aveva-pi-system-developer-technologies/)
+The provider's domain terms, defined.
 
-### AVEVA PI System REST API
+- [AVEVA Industrial Vocabulary](https://apis.io/vocabularies/aveva/aveva-vocabulary/)
 
-The AVEVA PI System REST API (PI Web API) provides RESTful HTTP access to time-series sensor data, asset metadata, and event frames stored in PI Server. Supports GET, POST, PUT, PATCH, and DELETE operations for reading real-time and historical process data, managing PI AF asset hierarchies, and streaming data via WebSocket.
+#### Security (3)
 
-- **Human URL:** [https://www.aveva.com/en/products/aveva-pi-system-developer-technologies/](https://www.aveva.com/en/products/aveva-pi-system-developer-technologies/)
-- **Base URL:** `https://{pi-server}/piwebapi`
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Tags
+- [Aveva Domain Security](https://apis.io/security/aveva/aveva-domain-security/)
+- [Aveva Trust Center](https://apis.io/security/aveva/aveva-trust-center/)
+- [Aveva Vulnerability Disclosure](https://apis.io/security/aveva/aveva-vulnerability-disclosure/)
 
-- Industrial Data
-- Time Series
-- Process Control
-- Historian
-- REST
-- WebSocket
+#### Plans and pricing (1)
 
-#### Properties
+Published plans, tiers and prices.
 
-- [Documentation](https://www.aveva.com/en/products/aveva-pi-system-developer-technologies/)
-- [Portal](https://docs.aveva.com/)
+- [Aveva Plans Pricing](https://apis.io/plans/aveva/aveva-plans-pricing/)
 
-## Common Properties
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.aveva.com)
 - [Documentation](https://docs.aveva.com/)
-- [Blog](https://www.aveva.com/en/perspectives/blog/)
-- [LinkedIn](https://www.linkedin.com/company/aveva)
-- [YouTube](https://www.youtube.com/@AVEVASoftware)
-- [About](https://www.aveva.com/en/about/)
+- [API reference](https://docs.aveva.com/bundle/pi-web-api-reference/page/help.html)
+- [Pricing](https://www.aveva.com/en/contact/)
 - [Support](https://www.aveva.com/en/support/)
-- [Newsroom](https://www.aveva.com/en/perspectives/news/)
+- [Changelog](https://docs.aveva.com/bundle/product-release-notes)
+- [Blog](https://www.aveva.com/en/perspectives/blog/)
+- [Terms of service](https://www.aveva.com/en/legal/terms-of-use/)
+- [Privacy policy](https://www.aveva.com/en/legal/privacy-policy/)
+- [GitHub](https://github.com/aveva)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 35.6** — thin · rubric 0.24.0 · scored 2026-10-20
+
+| Facet | Score |
+|---|---|
+| Discoverability | 68.8 |
+| Contract quality | 10.7 |
+| Contract governance | 13.6 |
+| Operational transparency | 31.6 |
+| Developer ergonomics | 40.5 |
+| Access clarity | 52.6 |
+
+**Agent readiness 2.9** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | yes |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 24.6** — Energy & Utilities
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/aveva/](https://apis.io/providers/aveva/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for AVEVA: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/aveva/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
